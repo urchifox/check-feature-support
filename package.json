@@ -20,15 +20,12 @@
     "typecheck": "tsc --noEmit",
     "typecheck-watch": "tsc --noEmit --watch",
     "lint": "npm-run-all -pc lint:**",
-    "lint:spaces": "ec --exclude vendor/*",
+    "lint:spaces": "ec",
     "lint:markup": "cd source && html-validator --quiet",
     "lint:html": "linthtml source/**/*.html --config .linthtmlrc",
     "lint:bem": "gulp lintBem --silent",
     "lint:styles": "stylelint \"source/styles/**/*.scss\"",
-    "lint:scripts": "eslint . --ignore-path .gitignore --ignore-pattern vendor/",
-    "optimize": "npm-run-all -p optimize:**",
-    "optimize:raster": "gulp optimizeRaster",
-    "optimize:vector": "gulp optimizeVector"
+    "lint:scripts": "eslint . --ignore-path .gitignore"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -48,9 +45,6 @@
     "gulp-plumber": "1.2.1",
     "gulp-postcss": "10.0.0",
     "gulp-sass": "5.1.0",
-    "gulp-sharp-responsive": "0.4.1",
-    "gulp-stacksvg": "4.0.0",
-    "gulp-svgmin": "4.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "linthtml-config-htmlacademy": "1.0.25",
     "npm-run-all": "4.1.5",
