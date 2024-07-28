@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
-  <head>
-    <meta charset="UTF-8">
-    <title>Feature support</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="preload" href="#" type="font/woff2" as="font">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/index.js" defer></script>
-  </head>
 
-  <body class="page__body">
-    <main>
-      <h1>Feature support</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde dolorem
-        ipsam quis nostrum possimus ducimus velit, soluta aliquid debitis odit
-        vitae enim pariatur, voluptatibus fugit quasi numquam facere nisi
-        aperiam?
+<head>
+  <meta charset="UTF-8">
+  <title>Feature support</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preload" href="#" type="font/woff2" as="font">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body class="page__body">
+  <main>
+    <h1>Feature support</h1>
+    <form class="feature-support" action="#">
+      <p class="feature-text" id="tooltip"></p>
+
+      <div class="feature-input-wrapper">
+        <select class="feature-select" name="feature-support-type" id="support-type">
+          <option class="feature-option" value="property">
+            Свойство
+          </option>
+          <option class="feature-option" value="selector">
+            Селектор
+          </option>
+        </select>
+        <input class="feature-input" type="text" name="input">
+      </div>
+      <input class="feature-send" type="submit" value="Проверить">
+      <output class="feature-result" name="output"></output>
+      <p class="feature-text feature-custom-properties">
+        Поддержка кастомных свойств (зеленый текст-
+        поддерживаются)
       </p>
-    </main>
-  </body>
+    </form>
+  </main>
+
+  <script src="scripts/index.js" type="module"></script>
+</body>
+
 </html>
