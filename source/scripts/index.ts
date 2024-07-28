@@ -20,11 +20,11 @@ export function queryElement<T extends HTMLElement = HTMLElement>(
 const typeMap = {
   property: {
     tooltip:
-      "Введите свойство CSS и его значение через двоеточие, например 'display: flex'",
+      "Enter the CSS property and its value separated by a colon, for example 'display: flex'",
     formatValue: (value: string) => value,
   },
   selector: {
-    tooltip: "Введите селектор, например ':has(a)'",
+    tooltip: "Enter a selector, for example':has(a)'",
     formatValue: (value: string) => `selector(${value})`,
   },
 } as const
@@ -60,8 +60,8 @@ function onFormSubmit(event: Event) {
   document.head.appendChild(styleElement)
 
   result.value = CSS.supports(value)
-    ? "Поддерживается"
-    : "Не поддерживается либо неправильно введено значение"
+    ? "Supported"
+    : "Value not supported or entered incorrectly"
 }
 
 function onFormChange() {
