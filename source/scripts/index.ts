@@ -44,13 +44,13 @@ function onFormSubmit(event: Event) {
 
   const style = `
         @supports (${value}) {
-            .feature-support .form__result {
+            .form__result {
                 color: green;
             }
         }
 
         @supports not (${value}) {
-            .feature-support .form__result {
+            .form__result {
                 color: tomato;
             }
         }
@@ -81,10 +81,10 @@ function setDeclaration(valueType: TypesForSupport) {
 
 export function initFeatureSuport() {
   form = queryElement(".form")
-  select = queryElement(".form .form__select")
-  input = queryElement(".form .form__input")
+  select = queryElement(".form__select")
+  input = queryElement(".form__input")
   declaration = queryElement("#input-declaration")
-  result = queryElement(".form .form__result")
+  result = queryElement(".form__result")
 
   const defaultValue = select.value
 
