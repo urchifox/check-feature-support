@@ -1,1 +1,32 @@
 /* здесь используйте глобальные селекторы img, body, html и так далее */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-height: 100vh;
+  /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+  min-height: 100dvh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    /* stylelint-disable declaration-no-important */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    /* stylelint-enable declaration-no-important */
+  }
+}
