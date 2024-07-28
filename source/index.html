@@ -11,24 +11,25 @@
 
 <body class="page__body">
   <main>
-    <h1>Feature support</h1>
-    <form class="feature-support" action="#">
-      <p class="feature-text" id="tooltip"></p>
+    <h1 class="title">Feature support</h1>
 
-      <div class="feature-input-wrapper">
-        <select class="feature-select" name="feature-support-type" id="support-type">
-          <option class="feature-option" value="property">
+    <form class="form" action="#">
+      <p class="form__text" id="input-declaration"></p>
+
+      <div class="form__input-wrapper">
+        <select class="form__select" name="feature-type" id="feature-type">
+          <option class="form__option" value="property">
             Свойство
           </option>
-          <option class="feature-option" value="selector">
+          <option class="form__option" value="selector">
             Селектор
           </option>
         </select>
-        <input class="feature-input" type="text" name="input">
+        <input class="form__input" type="text" name="feature-input">
       </div>
-      <input class="feature-send" type="submit" value="Проверить">
-      <output class="feature-result" name="output"></output>
-      <p class="feature-text feature-custom-properties">
+      <input class="form__submit" type="submit" value="Проверить">
+      <output class="form__result" name="output"></output>
+      <p class="form__text form__text--custom-properties">
         Поддержка кастомных свойств (зеленый текст-
         поддерживаются)
       </p>

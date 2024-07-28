@@ -3,7 +3,7 @@ type TypesForSupport = keyof typeof typeMap
 let form: HTMLFormElement
 let select: HTMLInputElement
 let input: HTMLInputElement
-let tooltip: HTMLElement
+let declaration: HTMLElement
 let result: HTMLInputElement
 
 export function queryElement<T extends HTMLElement = HTMLElement>(
@@ -44,13 +44,13 @@ function onFormSubmit(event: Event) {
 
   const style = `
         @supports (${value}) {
-            .feature-support .feature-result {
+            .feature-support .form__result {
                 color: green;
             }
         }
 
         @supports not (${value}) {
-            .feature-support .feature-result {
+            .feature-support .form__result {
                 color: tomato;
             }
         }
@@ -70,25 +70,25 @@ function onFormChange() {
 
 function onSelectChange(event: Event) {
   const valueType = (event.target as HTMLInputElement).value
-  if (valueType in typeMap) setTooltip(valueType as TypesForSupport)
+  if (valueType in typeMap) setDeclaration(valueType as TypesForSupport)
 }
 
-function setTooltip(valueType: TypesForSupport) {
+function setDeclaration(valueType: TypesForSupport) {
   const text = typeMap[valueType].tooltip
 
-  tooltip.textContent = text
+  declaration.textContent = text
 }
 
 export function initFeatureSuport() {
-  form = queryElement(".feature-support")
-  select = queryElement(".feature-support .feature-select")
-  input = queryElement(".feature-support .feature-input")
-  tooltip = queryElement("#tooltip")
-  result = queryElement(".feature-support .feature-result")
+  form = queryElement(".form")
+  select = queryElement(".form .form__select")
+  input = queryElement(".form .form__input")
+  declaration = queryElement("#input-declaration")
+  result = queryElement(".form .form__result")
 
   const defaultValue = select.value
 
-  if (defaultValue in typeMap) setTooltip(defaultValue as TypesForSupport)
+  if (defaultValue in typeMap) setDeclaration(defaultValue as TypesForSupport)
 
   form.addEventListener("submit", onFormSubmit)
   select.addEventListener("change", onSelectChange)
