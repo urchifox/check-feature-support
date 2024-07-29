@@ -1,0 +1,1 @@
+function r(e,t){let n=(t??document).querySelector(e);if(!n)throw Error(`Element "${e}" not found`);if(!(n instanceof HTMLElement))throw Error(`Element "${e}" is not an HTMLElement`);return n}export{r as queryElement};
