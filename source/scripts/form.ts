@@ -15,7 +15,7 @@ const typeMap = {
     formatValue: (value: string) => value,
   },
   selector: {
-    tooltip: "Enter a selector, for example':has(a)'",
+    tooltip: "Enter a selector, for example ':has(a)'",
     formatValue: (value: string) => `selector(${value})`,
   },
 } as const

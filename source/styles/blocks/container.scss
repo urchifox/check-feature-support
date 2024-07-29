@@ -1,0 +1,20 @@
+.container {
+  margin: 0 auto;
+
+  padding-left: min(5%, 2rem);
+  padding-right: min(5%, 2rem);
+  width: 100%;
+  max-width: 560px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @supports (width: 1rem) {
+    max-width: 35rem;
+  }
+
+  @supports (width: 1ch) {
+    max-width: 70ch;
+  }
+}
