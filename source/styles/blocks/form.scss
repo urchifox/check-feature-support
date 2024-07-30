@@ -15,14 +15,6 @@
 .form__text {
   margin-block: 0;
   font-size: 1rem;
-
-  &--custom-properties {
-    --sucess: #008000;
-
-    color: #ff6347;
-    /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
-    color: var(--sucess);
-  }
 }
 
 .form__input-wrapper {
