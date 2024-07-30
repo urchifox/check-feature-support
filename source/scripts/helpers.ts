@@ -8,5 +8,12 @@ export function queryElement<T extends HTMLElement = HTMLElement>(
 
   if (!(element instanceof HTMLElement)) throw Error(`Element "${selector}" is not an HTMLElement`)
 
-  return element
+  return element;
+}
+
+export function queryElements<T extends HTMLElement = HTMLElement>(
+  selector: string,
+  parent?: HTMLElement
+): T[] {
+  return [...(parent ?? document).querySelectorAll<T>(selector)];
 }
