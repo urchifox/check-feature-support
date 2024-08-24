@@ -5,15 +5,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  min-height: 100vh;
-  /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
-  min-height: 100dvh;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;

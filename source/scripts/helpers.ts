@@ -2,11 +2,25 @@ export function queryElement<T extends HTMLElement = HTMLElement>(
   selector: string,
   parent?: HTMLElement
 ): T {
-  const element = (parent ?? document).querySelector<T>(selector)
+  const element = (parent ?? document).querySelector<T>(selector);
 
-  if (!element) throw Error(`Element "${selector}" not found`)
+  if (!element) throw Error(`Element "${selector}" not found`);
 
-  if (!(element instanceof HTMLElement)) throw Error(`Element "${selector}" is not an HTMLElement`)
+  if (!(element instanceof HTMLElement))
+    throw Error(`Element "${selector}" is not an HTMLElement`);
 
-  return element
+  return element;
+}
+
+export function queryElements<T extends HTMLElement = HTMLElement>(
+  selector: string,
+  parent?: HTMLElement
+): T[] {
+  return [...(parent ?? document).querySelectorAll<T>(selector)];
+}
+
+export function addStyles(style: string) {
+  const styleElement = document.createElement("style");
+  styleElement.textContent = style;
+  document.head.appendChild(styleElement);
 }

@@ -1,0 +1,24 @@
+.page {
+  --font-family-basic: "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+  --font-family-mono: "Lucida Console", "Monaco", monospace;
+
+  font-family: var(--font-family-basic);
+}
+
+
+.page__body {
+  margin: 0;
+  padding: 30vh 0 0;
+  border: 0;
+  min-height: 100vh;
+  /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page__title {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}

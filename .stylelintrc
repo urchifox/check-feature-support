@@ -19,6 +19,9 @@
           "color-opacity"
         ]
       }
+    ],
+    "no-unknown-custom-properties": [
+      null
     ]
   }
 }
