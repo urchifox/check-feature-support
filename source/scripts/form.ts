@@ -1,11 +1,10 @@
-import { queryElement, queryElements } from "./helpers";
+import { addStyles, queryElement, queryElements } from "./helpers";
 
-type TypesForSupport = "property" | "custom-properties" | "selector";
+type TypesForSupport = "property" | "custom properties" | "selector";
 type TypeObject = {
   tooltip: string;
-  formatValue: (value: string) => string;
   isSupported: (userInput: string) => boolean;
-  onSelectChange?: (event: Event) => void;
+  onSelect?: (event: Event) => void;
 };
 
 let form: HTMLFormElement;
@@ -14,65 +13,54 @@ let input: HTMLInputElement;
 let declaration: HTMLElement;
 let result: HTMLInputElement;
 
-const typeMap: Record<TypesForSupport, TypeObject> = {
-  property: {
-    tooltip:
-      "Enter the CSS property and its value separated by a colon, for example 'display: flex'",
-    formatValue: (value: string) => value,
+const supportedTypeMap: Record<TypesForSupport, TypeObject> = {
+  "property": {
+    tooltip: "Enter the CSS property and its value separated by a colon, for example 'display: flex'",
     isSupported: (userInput) => {
-      const value = typeMap["property"].formatValue(userInput);
+      addStyles(`
+        @supports (${userInput}) {
+          .form__result {
+            color: green;
+          }
+        }
 
-      const style = `
-            @supports (${value}) {
-                .form__result {
-                    color: green;
-                }
-            }
+        @supports not (${userInput}) {
+          .form__result {
+            color: tomato;
+          }
+        }
+      `)
 
-            @supports not (${value}) {
-                .form__result {
-                    color: tomato;
-                }
-            }
-        `;
-      const styleElement = document.createElement("style");
-      styleElement.textContent = style;
-      document.head.appendChild(styleElement);
-
-      return CSS.supports(value);
+      return CSS.supports(userInput);
     },
   },
-  "custom-properties": {
+
+  "custom properties": {
     tooltip: "",
-    formatValue: (value: string) => value,
     isSupported: () => {
-      const style = `
+      addStyles(`
         .form__result {
           --sucess: #008000;
           color: #ff6347;
           color: var(--sucess);
         }
-      `;
-      const styleElement = document.createElement("style");
-      styleElement.textContent = style;
-      document.head.appendChild(styleElement);
+      `)
 
       return CSS.supports("color", "var(--primary)");
     },
-    onSelectChange: (event) => {
+    onSelect: (event) => {
       event.stopPropagation();
       input.value = "";
       input.disabled = true;
       checkSupport();
     },
   },
+
   selector: {
     tooltip: "Enter a selector, for example ':has(a)'",
-    formatValue: (value: string) => `selector(${value})`,
     isSupported: (userInput) => {
-      const value = typeMap["selector"].formatValue(userInput);
-
-      const style = `
+      const value = `selector(${userInput})`;
+      addStyles(`
             @supports (${value}) {
                 .form__result {
                     color: green;
@@ -84,10 +72,7 @@ const typeMap: Record<TypesForSupport, TypeObject> = {
                     color: tomato;
                 }
             }
-        `;
-      const styleElement = document.createElement("style");
-      styleElement.textContent = style;
-      document.head.appendChild(styleElement);
+        `)
 
       return CSS.supports(value);
     },
@@ -102,14 +87,14 @@ function onFormSubmit(event: Event) {
 function checkSupport() {
   const valueType = select.value;
 
-  if (!(valueType in typeMap))
+  if (!(valueType in supportedTypeMap))
     throw new Error(`Selected option "${valueType}" is not in typeMap`);
 
   const userInput = input.value;
 
   if (userInput.length === 0 && !input.disabled) return;
 
-  result.value = typeMap[valueType as TypesForSupport].isSupported(userInput)
+  result.value = supportedTypeMap[valueType as TypesForSupport].isSupported(userInput)
     ? "Supported"
     : "Value not supported or entered incorrectly";
 }
@@ -121,22 +106,22 @@ function onFormChange() {
 function onSelectChange(event: Event) {
   const valueType = (event.target as HTMLInputElement).value;
 
-  if (!(valueType in typeMap))
+  if (!(valueType in supportedTypeMap))
     throw new Error(`The option vaue "${valueType}" is not in typeMap`);
 
   setDeclaration(valueType as TypesForSupport);
 
-  const onSelectChange = typeMap[valueType as TypesForSupport].onSelectChange;
+  const onSelect = supportedTypeMap[valueType as TypesForSupport].onSelect;
 
-  if (onSelectChange) {
-    onSelectChange(event);
+  if (onSelect) {
+    onSelect(event);
   } else {
     input.disabled = false;
   }
 }
 
 function setDeclaration(valueType: TypesForSupport) {
-  const text = typeMap[valueType].tooltip;
+  const text = supportedTypeMap[valueType].tooltip;
   declaration.textContent = text;
 }
 
@@ -145,7 +130,7 @@ function checkTypes() {
   const typesNamesOnPage = options.map(
     (option) => option.value
   ) as TypesForSupport[];
-  const typeNamesInMap = Object.keys(typeMap);
+  const typeNamesInMap = Object.keys(supportedTypeMap);
   const typesNamesSet = new Set([...typesNamesOnPage, ...typeNamesInMap]);
 
   if (
@@ -165,8 +150,7 @@ export function initFeatureSuport() {
   result = queryElement(".form__result");
 
   const defaultValue = select.value;
-
-  if (defaultValue in typeMap) setDeclaration(defaultValue as TypesForSupport);
+  if (defaultValue in supportedTypeMap) setDeclaration(defaultValue as TypesForSupport);
 
   form.addEventListener("submit", onFormSubmit);
   select.addEventListener("change", onSelectChange);
