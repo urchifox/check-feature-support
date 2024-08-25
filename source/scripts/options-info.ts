@@ -3,6 +3,24 @@ import { checkSupport } from "./form";
 import { addStyles } from "./helpers";
 import { OptionInfo, OptionsForSupport } from "./types";
 
+function checkCss (value: string) {
+  addStyles(`
+    @supports (${value}) {
+      .form__result {
+        color: green;
+      }
+    }
+
+    @supports not (${value}) {
+      .form__result {
+        color: tomato;
+      }
+    }
+  `)
+
+  return CSS.supports(value);
+}
+
 export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
   "property": {
     tooltip: "Enter the name of a CSS property, for example, \"display\". You can also optionally add the property value after a colon, like \"display: flex\".",
@@ -11,21 +29,7 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
         ? `${userInput}: initial`
         : userInput
 
-      addStyles(`
-        @supports (${value}) {
-          .form__result {
-            color: green;
-          }
-        }
-
-        @supports not (${value}) {
-          .form__result {
-            color: tomato;
-          }
-        }
-      `)
-
-      return CSS.supports(value);
+      return checkCss(value);
     },
   },
 
@@ -54,21 +58,8 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
     tooltip: "Enter a selector, for example ':has(a)'",
     isSupported: (userInput) => {
       const value = `selector(${userInput})`;
-      addStyles(`
-            @supports (${value}) {
-                .form__result {
-                    color: green;
-                }
-            }
 
-            @supports not (${value}) {
-                .form__result {
-                    color: tomato;
-                }
-            }
-        `)
-
-      return CSS.supports(value);
+      return checkCss(value);
     },
   },
 
@@ -76,21 +67,8 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
     tooltip: "Enter a color value, for example, \"rgb(0 0 0 / .5)\"",
     isSupported: (userInput) => {
       const value = `color: ${userInput}`;
-      addStyles(`
-            @supports (${value}) {
-                .form__result {
-                    color: green;
-                }
-            }
 
-            @supports not (${value}) {
-                .form__result {
-                    color: tomato;
-                }
-            }
-        `)
-
-      return CSS.supports(value);
+      return checkCss(value);
     }
   },
 
@@ -98,21 +76,8 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
     tooltip: "",
     isSupported: (userInput) => {
       const value = `width: 1${userInput}`;
-      addStyles(`
-            @supports (${value}) {
-                .form__result {
-                    color: green;
-                }
-            }
 
-            @supports not (${value}) {
-                .form__result {
-                    color: tomato;
-                }
-            }
-        `)
-
-      return CSS.supports(value);
+      return checkCss(value);
     }
   }
 } as const;
