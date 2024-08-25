@@ -1,5 +1,5 @@
 import { assignElements, declaration, form, input, options, result, select } from "./elements";
-import { optionsInfo } from "./suppported-option";
+import { optionsInfo } from "./options-info";
 import { OptionsForSupport } from "./types";
 
 function onFormSubmit(event: Event) {
