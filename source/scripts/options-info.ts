@@ -79,5 +79,14 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
 
       return checkCss(value);
     }
-  }
+  },
+
+  "angle-units": {
+    tooltip: "Enter a length value, for example, \"grad\"",
+    isSupported: (userInput) => {
+      const value = `transform: rotate(1${userInput})`;
+
+      return checkCss(value);
+    },
+  },
 } as const;
