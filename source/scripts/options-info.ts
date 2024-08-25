@@ -71,4 +71,26 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
       return CSS.supports(value);
     },
   },
+
+  "color-units": {
+    tooltip: "Enter a color value, for example, \"rgb(0 0 0 / .5)\"",
+    isSupported: (userInput) => {
+      const value = `color: ${userInput}`;
+      addStyles(`
+            @supports (${value}) {
+                .form__result {
+                    color: green;
+                }
+            }
+
+            @supports not (${value}) {
+                .form__result {
+                    color: tomato;
+                }
+            }
+        `)
+
+      return CSS.supports(value);
+    }
+  }
 } as const;

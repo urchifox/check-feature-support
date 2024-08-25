@@ -42,9 +42,14 @@
   background-color: transparent;
 }
 
+.form__optgroup {
+  text-transform: uppercase;
+}
+
 .form__option {
   font-family: var(--font-family-mono);
   font-size: 1rem;
+  text-transform: none;
 }
 
 .form__input {
