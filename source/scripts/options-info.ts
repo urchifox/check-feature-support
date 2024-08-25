@@ -92,5 +92,27 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
 
       return CSS.supports(value);
     }
+  },
+
+  "length-units": {
+    tooltip: "",
+    isSupported: (userInput) => {
+      const value = `width: 1${userInput}`;
+      addStyles(`
+            @supports (${value}) {
+                .form__result {
+                    color: green;
+                }
+            }
+
+            @supports not (${value}) {
+                .form__result {
+                    color: tomato;
+                }
+            }
+        `)
+
+      return CSS.supports(value);
+    }
   }
 } as const;
