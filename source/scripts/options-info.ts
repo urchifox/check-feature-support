@@ -73,7 +73,7 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
   },
 
   "length-units": {
-    tooltip: "",
+    tooltip: "Enter a length value, for example, \"rem\"",
     isSupported: (userInput) => {
       const value = `width: 1${userInput}`;
 
