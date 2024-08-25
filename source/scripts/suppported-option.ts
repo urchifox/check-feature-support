@@ -5,23 +5,27 @@ import { OptionInfo, OptionsForSupport } from "./types";
 
 export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
   "property": {
-    tooltip: "Enter the CSS property and its value separated by a colon, for example 'display: flex'",
+    tooltip: "Enter the name of a CSS property, for example, \"display\". You can also optionally add the property value after a colon, like \"display: flex\".",
     isSupported: (userInput) => {
+      const value = userInput.indexOf(":") === -1
+        ? `${userInput}: initial`
+        : userInput
+
       addStyles(`
-        @supports (${userInput}) {
+        @supports (${value}) {
           .form__result {
             color: green;
           }
         }
 
-        @supports not (${userInput}) {
+        @supports not (${value}) {
           .form__result {
             color: tomato;
           }
         }
       `)
 
-      return CSS.supports(userInput);
+      return CSS.supports(value);
     },
   },
 
