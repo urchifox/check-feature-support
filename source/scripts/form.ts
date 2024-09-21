@@ -1,6 +1,6 @@
 import { assignElements, declaration, form, input, options, result, select } from "./elements";
 import { optionsInfo } from "./options-info";
-import { OptionsForSupport } from "./types";
+import { isOptionForSupport, OptionsForSupport } from "./types";
 
 function onFormSubmit(event: Event) {
   event.preventDefault();
@@ -34,17 +34,22 @@ function setDeclaration(valueType: OptionsForSupport) {
 }
 
 function checkOptions() {
-  const typesNamesOnPage = options.map(
-    (option) => option.value
-  ) as OptionsForSupport[];
+  const typesNamesOnPage: OptionsForSupport[] = []
+  
+  for (const option of options) {
+    if (!isOptionForSupport(option.value)){
+      throw new Error(`Option with name ${option.value} is not part of options Map.`);
+    }
+
+    typesNamesOnPage.push(option.value)
+  }
+
   const typeNamesInMap = Object.keys(optionsInfo);
-  const typesNamesSet = new Set([...typesNamesOnPage, ...typeNamesInMap]);
 
   if (
-    typesNamesSet.size !== typesNamesOnPage.length ||
-    typesNamesSet.size !== typeNamesInMap.length
+    typesNamesOnPage.length !== typeNamesInMap.length
   )
-    throw new Error("Types names on page and in Map are not identical");
+    throw new Error("Number of types names on page and in Map are not identical");
 }
 
 export function checkSupport() {
