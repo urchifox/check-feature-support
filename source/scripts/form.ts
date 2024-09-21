@@ -14,12 +14,12 @@ function onFormChange() {
 function onSelectChange(event: Event) {
   const valueType = (event.target as HTMLInputElement).value;
 
-  if (!(valueType in optionsInfo))
+  if (!isOptionForSupport(valueType))
     throw new Error(`The option vaue "${valueType}" is not in typeMap`);
 
-  setDeclaration(valueType as OptionsForSupport);
+  setDeclaration(valueType);
 
-  const onSelect = optionsInfo[valueType as OptionsForSupport].onSelect;
+  const onSelect = optionsInfo[valueType].onSelect;
 
   if (onSelect) {
     onSelect(event);
@@ -55,14 +55,14 @@ function checkOptions() {
 export function checkSupport() {
   const valueType = select.value;
 
-  if (!(valueType in optionsInfo))
+  if (!isOptionForSupport(valueType))
     throw new Error(`Selected option "${valueType}" is not in typeMap`);
 
   const userInput = input.value;
 
   if (userInput.length === 0 && !input.disabled) return;
 
-  result.value = optionsInfo[valueType as OptionsForSupport].isSupported(userInput)
+  result.value = optionsInfo[valueType].isSupported(userInput)
     ? "Supported"
     : "Value not supported or entered incorrectly";
 }
@@ -72,7 +72,7 @@ export function initFeatureSuport() {
   checkOptions();
 
   const defaultValue = select.value;
-  if (defaultValue in optionsInfo) setDeclaration(defaultValue as OptionsForSupport);
+  if (isOptionForSupport(defaultValue)) setDeclaration(defaultValue);
 
   form.addEventListener("submit", onFormSubmit);
   select.addEventListener("change", onSelectChange);
