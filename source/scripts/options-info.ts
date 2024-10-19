@@ -55,7 +55,7 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
   },
 
   selector: {
-    tooltip: "Enter a selector, for example ':has(a)'",
+    tooltip: "Enter a selector, for example \":has(a)\"",
     isSupported: (userInput) => {
       const value = `selector(${userInput})`;
 
