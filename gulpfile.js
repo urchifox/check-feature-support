@@ -19,6 +19,7 @@ const PATH_TO_SOURCE = './source/';
 const PATH_TO_DIST = './build/';
 const PATHS_TO_STATIC = [
   `${PATH_TO_SOURCE}images/**/*`,
+  `${PATH_TO_SOURCE}favicons/**/*`,
   `${PATH_TO_SOURCE}fonts/**/*.{woff2,woff}`,
   `${PATH_TO_SOURCE}*.ico`,
   `${PATH_TO_SOURCE}*.webmanifest`,
