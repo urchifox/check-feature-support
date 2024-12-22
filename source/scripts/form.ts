@@ -35,7 +35,7 @@ function setDeclaration(valueType: OptionsForSupport) {
 
 function checkOptions() {
   const typesNamesOnPage: OptionsForSupport[] = []
-  
+
   for (const option of options) {
     if (!isOptionForSupport(option.value)){
       throw new Error(`Option with name ${option.value} is not part of options Map.`);
