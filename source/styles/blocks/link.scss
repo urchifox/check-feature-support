@@ -1,11 +1,21 @@
 .link {
-  --icon-color: rgb(0, 0, 0);
+  --icon-color: var(--color-text);
   text-decoration: none;
-  color: inherit;
-  transition: color 0.3s ease;
+  color: var(--color-text);
+  transition: color 0.3s ease, opacity 0.3s ease;
+  border-radius: 0.3rem;
 
   &:hover {
-    --icon-color: hsl(275, 64%, 71%);
+    --icon-color: var(--color-accent);
     color: var(--icon-color);
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline-offset: 0.3rem;
+    outline: 0.15rem solid var(--color-accent);
   }
 }

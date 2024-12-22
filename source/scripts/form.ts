@@ -1,4 +1,4 @@
-import { assignElements, declaration, form, input, options, result, select } from "./elements";
+import { assignElements, declaration, form, input, options, result, select, submitButton } from "./elements";
 import { optionsInfo } from "./options-info";
 import { isOptionForSupport, OptionsForSupport } from "./types";
 
@@ -25,6 +25,7 @@ function onSelectChange(event: Event) {
     onSelect(event);
   } else {
     input.disabled = false;
+    submitButton.disabled = false;
   }
 }
 
