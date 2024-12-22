@@ -1,0 +1,29 @@
+.icon-text {
+  &::before {
+    content: "";
+
+    margin-right: 0.5em;
+
+    width: 1.5em;
+    height: 1.5em;
+
+    display: inline-block;
+    vertical-align: middle;
+
+    background-color: var(--icon-color);
+    mask-image: var(--icon-url);
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+
+    transition: background-color 0.3s ease-out;
+  }
+
+  &--github {
+    --icon-url: url("../../images/github.svg");
+  }
+
+  &--gmail {
+    --icon-url: url("../../images/gmail.svg");
+  }
+}

@@ -1,0 +1,11 @@
+.link {
+  --icon-color: rgb(0, 0, 0);
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+
+  &:hover {
+    --icon-color: hsl(275, 64%, 71%);
+    color: var(--icon-color);
+  }
+}

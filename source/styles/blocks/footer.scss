@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.6rem 1.2rem;
+  justify-content: center;
+}
+
+.footer__footnote {
+  margin-block: 0;
+  width: 100%;
+}
