@@ -1,4 +1,4 @@
-import { input } from "./elements";
+import { input, submitButton } from "./elements";
 import { checkSupport } from "./form";
 import { addStyles } from "./helpers";
 import { OptionInfo, OptionsForSupport } from "./types";
@@ -50,12 +50,13 @@ export const optionsInfo: Record<OptionsForSupport, OptionInfo> = {
       event.stopPropagation();
       input.value = "";
       input.disabled = true;
+      submitButton.disabled = true;
       checkSupport();
     },
   },
 
   selector: {
-    tooltip: "Enter a selector, for example ':has(a)'",
+    tooltip: "Enter a selector, for example \":has(a)\"",
     isSupported: (userInput) => {
       const value = `selector(${userInput})`;
 

@@ -6,6 +6,7 @@ export let input: HTMLInputElement;
 export let declaration: HTMLElement;
 export let result: HTMLInputElement;
 export let options: HTMLOptionElement[];
+export let submitButton: HTMLButtonElement
 
 export function assignElements() {
   form = queryElement<HTMLFormElement>(".form");
@@ -14,4 +15,5 @@ export function assignElements() {
   declaration = queryElement<HTMLElement>("#input-declaration");
   result = queryElement<HTMLInputElement>(".form__result");
   options = queryElements<HTMLOptionElement>(".form__option");
+  submitButton = queryElement<HTMLButtonElement>(".form__submit");
 }
